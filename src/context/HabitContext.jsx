@@ -17,7 +17,7 @@ export const HabitProvider = ({ children }) => {
             id: Date.now(), 
             title, 
             priority, 
-            reps: 0
+            repetitions: 0
         }
         setHabits([...habits, newHabit]);
         setTitle("")
@@ -27,8 +27,35 @@ export const HabitProvider = ({ children }) => {
         setHabits(habits.filter(habit => habit.id !== id))
     }
 
+    const increaseReps = (id) => {
+        setHabits(habits.map(habit => {
+            if (habit.id === id) {
+                return { ...habit, repetitions: habit.repetitions + 1 };
+            }
+            return habit;
+        }))
+    }
+
+    const decreaseReps = (id) => {
+        setHabits(habits.map(habit => {
+            if (habit.id === id && habit.repetitions > 0) {
+                return { ...habit, repetitions: habit.repetitions - 1 };
+            }
+            return habit;
+        }))
+    }
+
+    const resetReps = (id) => {
+        setHabits(habits.map(habit => {
+            if(habit.id === id) {
+                return { ...habit, repetitions: 0 };
+            }
+            return habit;
+        }))
+
+    }
     return (
-        <HabitContext.Provider value={{ habits, removeHabit, setHabits, title, setTitle, priority, setPriority, addHabit }}>
+        <HabitContext.Provider value={{ increaseReps, decreaseReps, resetReps, habits, removeHabit, setHabits, title, setTitle, priority, setPriority, addHabit }}>
             {children}
         </HabitContext.Provider>
     );
