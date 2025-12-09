@@ -3,14 +3,14 @@ import { HabitContext } from "../../context/Habitcontext";
 
 const HabitItem = () => {
 
-const { habits} = useContext(HabitContext);
+const { habits, removeHabit} = useContext(HabitContext);
 
     return(
         <div>
-                {habits.map((habit, index) => (
-                <div key={index}>
+                {habits.map((habit, priority) => (
+                <div key={habit.id}>
                     <h3>{habit.title}</h3>
-                    <button>Delete</button>
+                    <button onClick={() => removeHabit(habit.id)}>Delete</button>
                     <p>Priority: {habit.priority}</p>
                     <p>Goal: {habit.goal}</p>
                     <p>Repetitions: {habit.repetitions}</p>

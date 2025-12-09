@@ -4,7 +4,7 @@ import { HabitContext } from "../../context/Habitcontext"
 
 const HabitForm = () => {
 
-const {habits, setHabits, title, setTitle, handleAddHabit,priority, setPriority } = useContext(HabitContext)
+const { addHabit, removeHabbit, habits, setHabits, title, setTitle, handleAddHabit,priority, setPriority } = useContext(HabitContext)
     
     return(
         <div>
@@ -16,7 +16,7 @@ const {habits, setHabits, title, setTitle, handleAddHabit,priority, setPriority 
                 <option value="medium">🟡 Medium priority</option>
                 <option value="high">🔴 High priority</option>
             </select>
-            <button onClick={handleAddHabit}>Add Habit</button>
+            <button onClick={() => addHabit(title, priority)}>Add Habit</button>
             <hr />
         </div>
     )
