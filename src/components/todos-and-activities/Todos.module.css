@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    list-style: none;
+}
+
+ul {
+    list-style: none;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+li {
+    display: flex;
+    padding: 10px;
+    background-color: lightgray;
+    border-radius: 16px;
+}

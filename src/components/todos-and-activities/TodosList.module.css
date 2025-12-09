@@ -1,0 +1,21 @@
+.completedList {
+ 	text-decoration: line-through;
+ 	color: gray;
+ }
+
+.completed {
+    background-color: #f3f3f3;
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+    margin: 16px 0;
+}
+
+
+.TodoList {
+    background-color: #f3f3f3;
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+    margin: 16px 0;
+}

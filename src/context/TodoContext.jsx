@@ -5,6 +5,7 @@ export const TodoContext = createContext();
 const TodoProvider = ({ children }) => {
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")) || []);
+  const [editingTodoId, setEditingTodoId] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -33,8 +34,12 @@ const TodoProvider = ({ children }) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
+  const updateTodo = (id, updatedTodo) => {
+    setTodos(todos.map(todo => todo.id === id ? { ...todo, ...updatedTodo } : todo));
+  };
+
   return (
-    <TodoContext.Provider value={{ todos, addTodo, updateStatus, removeTodo }}>
+    <TodoContext.Provider value={{ todos, addTodo, updateStatus, removeTodo, updateTodo, editingTodoId, setEditingTodoId }}>
       {children}
     </TodoContext.Provider>
   );

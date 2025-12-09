@@ -1,21 +1,36 @@
-import { useContext, useState } from "react";
+import { use, useContext, useState } from "react";
 import { TodoContext } from "../../context/TodoContext";
-import styles from './AddTodo.module.css';
 
-const AddTodo = () => {
+const EditTodo = () => {
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const status = "Pending";
-    const [estimatedTime, setEstimatedTime] = useState("");
-    const [category, setCategory] = useState("");
-    const [deadline, setDeadline] = useState("");
+    const { todos, updateTodo, editingTodoId, setEditingTodoId } = useContext(TodoContext);
 
-  const { addTodo } = useContext(TodoContext);
+    const todo = todos.find(todo => todo.id === editingTodoId);
+
+    if (!todo) return null;
+
+    const [title, setTitle] = useState(todo.title);
+    const [description, setDescription] = useState(todo.description);
+    const status = (todo.status);
+    const [estimatedTime, setEstimatedTime] = useState(todo.estimatedTime);
+    const [category, setCategory] = useState(todo.category);
+    const [deadline, setDeadline] = useState(todo.deadline);
+
+    const handleSave = () => {
+        updateTodo(editingTodoId, {
+            title,
+            description,
+            status,
+            estimatedTime,
+            category,
+            deadline
+        });
+        setEditingTodoId(null);
+    }   
 
   return (
-    <div className={styles.addTodoContainer}>
-      <h2>Add New Todo</h2>
+    <div>
+      <h2>Edit Your Todo</h2>
       <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
       <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}/>
       <select value={estimatedTime} onChange={(e) => setEstimatedTime(e.target.value)}>
@@ -33,17 +48,9 @@ const AddTodo = () => {
         <option value="Health">Health</option>
       </select>
         <input type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
-        <button onClick={() => {addTodo("defaultUser", title, description, status, estimatedTime, category, deadline);
-            setTitle("");
-            setDescription("");
-            setEstimatedTime("");
-            setCategory("");
-            setDeadline("");}}>
-            Add Todo</button>
+        <button onClick={() => {handleSave();}}>Save</button>
     </div>
   );
 }
 
-export default AddTodo;
-
-
+export default EditTodo;
