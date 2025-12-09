@@ -12,9 +12,9 @@ const { addHabit, removeHabbit, habits, setHabits, title, setTitle, handleAddHab
             <h3>{title}</h3>
             <input type="text" placeholder="Enter habit name" onChange={(e) => setTitle(e.target.value)} required/>
             <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-                <option value="low">🟢 Low priority</option>
-                <option value="medium">🟡 Medium priority</option>
-                <option value="high">🔴 High priority</option>
+                <option value="Low">🟢 Low priority</option>
+                <option value="Medium">🟡 Medium priority</option>
+                <option value="High">🔴 High priority</option>
             </select>
             <button onClick={() => addHabit(title, priority)}>Add Habit</button>
             <hr />
