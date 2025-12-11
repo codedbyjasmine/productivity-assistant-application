@@ -1,4 +1,4 @@
-import Todos from "../components/todos-and-activities/Todos";
+import Todos from "../components/todos-and-activities/Todos/Todos";
 
 const HomePage = () => {
   return (

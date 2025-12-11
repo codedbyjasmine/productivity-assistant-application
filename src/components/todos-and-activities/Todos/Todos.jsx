@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { TodoContext } from "../../context/TodoContext";
-import TodosList from "./TodosList.jsx";
-import AddTodo from "./AddTodo.jsx";
+import { TodoContext } from "../../../context/TodoContext.jsx";
+import TodosList from "../TodosList/TodosList.jsx";
+import AddTodo from "../AddTodo/AddTodo.jsx";
 import styles from './Todos.module.css';
 
 const Todos = () => {

@@ -1,20 +1,24 @@
 import { useContext, useState } from "react";
-import { TodoContext } from "../../context/TodoContext";
+import { TodoContext } from "../../../context/TodoContext";
 import styles from './TodosList.module.css';
-import EditTodo from "./EditTodo";
+import EditTodo from "../EditTodo/EditTodo";
+import FilterTodo from "../FilterTodo/FilterTodo";
+import SortTodo from "../SortTodo/SortTodo";
 
 const TodosList = () => {
-  const { todos, removeTodo, updateStatus, updateTodo, editingTodoId, setEditingTodoId } = useContext(TodoContext);
+  const { removeTodo, updateStatus, setEditingTodoId, getFilteredAndSortedTodos } = useContext(TodoContext);
     const [Show, setShow] = useState(false);
+    const visibleTodos = getFilteredAndSortedTodos();
 
     return (
         <>
+        <div className="FilterAndSorting"><SortTodo /><FilterTodo /></div>
             <div className={styles.TodoList}>
                 <h2>Todo List</h2>
                 <ul>
-                    {todos.filter (todo => todo.status !== "Completed") .map((todo) => (
+                    {visibleTodos.filter (todo => todo.status !== "Completed") .map((todo) => (
                         <li key={todo.id}>
-                        <input type="checkbox" checked={todo.status === "Completed"} onChange={() => updateStatus(todo.id, todo.status === "Completed" ? "Pending" : "Completed")} />
+                        <input type="checkbox" checked={todo.status === "Completed"} onChange={() => updateStatus(todo.id)} />
                         <h3>{todo.title}</h3>
                         <p>{todo.description}</p>
                         <p>Status: {todo.status}</p>
@@ -31,9 +35,9 @@ const TodosList = () => {
         <div className={styles.completed}>
             <h2>Completed Todos</h2>
             <ul className={styles.completedList}>
-                {todos.filter (todo => todo.status === "Completed") .map((todo) => (
+                {visibleTodos.filter (todo => todo.status === "Completed") .map((todo) => (
                     <li key={todo.id}>
-                        <input type="checkbox" checked={todo.status === "Completed"} onChange={() => updateStatus(todo.id, todo.status === "Completed" ? "Pending" : "Completed")} />
+                        <input type="checkbox" checked={todo.status === "Completed"} onChange={() => updateStatus(todo.id)} />
                         <h3>{todo.title}</h3>
                         <p>{todo.description}</p>
                         <p>Status: {todo.status}</p>

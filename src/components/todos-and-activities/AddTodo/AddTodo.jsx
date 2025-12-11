@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { TodoContext } from "../../context/TodoContext";
+import { TodoContext } from "../../../context/TodoContext";
 import styles from './AddTodo.module.css';
 
 const AddTodo = () => {
