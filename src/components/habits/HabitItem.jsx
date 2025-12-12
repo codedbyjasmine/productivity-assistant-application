@@ -3,11 +3,13 @@ import { HabitContext } from "../../context/Habitcontext";
 
 const HabitItem = () => {
 
-const { habits, removeHabit, increaseReps, decreaseReps, resetReps } = useContext(HabitContext);
+const { removeHabit, increaseReps, decreaseReps, resetReps, getDisplayedHabits } = useContext(HabitContext);
+
+const displayedHabits = getDisplayedHabits();
 
     return(
         <div>
-                {habits.map((habit, priority) => (
+                {displayedHabits.map((habit, priority) => (
                 <div key={habit.id}>
                     <h3>{habit.title}</h3>
                     <button onClick={() => removeHabit(habit.id)}>Delete</button>

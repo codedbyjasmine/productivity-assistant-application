@@ -2,9 +2,10 @@ import { useContext } from "react"
 import { HabitContext } from "../../context/Habitcontext"
 
 
+
 const HabitForm = () => {
 
-const { addHabit, removeHabbit, habits, setHabits, title, setTitle, handleAddHabit,priority, setPriority } = useContext(HabitContext)
+const { addHabit, removeHabit, habits, setHabits, title, setTitle, handleAddHabit,priority, setPriority } = useContext(HabitContext)
     
     return(
         <div>

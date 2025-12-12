@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import HabitForm from "./HabitForm"
-import { HabitContext } from "../../context/Habitcontext";
 import HabitItem from "./HabitItem";
 import SortHabits from "./SortHabits";
+import { HabitContext } from "../../context/Habitcontext";
 
 
 const Habits = () => {
     
-    const { habits } = useContext(HabitContext);
+    const { habits, getDisplayedHabits } = useContext(HabitContext);
+
+    const displayedHabits = getDisplayedHabits();
     
     return (
         <div>

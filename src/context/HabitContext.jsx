@@ -5,7 +5,7 @@ export const HabitContext = createContext();
 export const HabitProvider = ({ children }) => {
     
     const [title, setTitle] = useState("");
-    const [priority, setPriority] = useState("medium");
+    const [priority, setPriority] = useState("Medium");
     const [habits, setHabits] = useState([
         { id: 1, title: "Morning Run", priority: "High", repetitions: 5 },
         { id: 2, title: "Read Book", priority: "Medium", repetitions: 3 },
@@ -13,7 +13,7 @@ export const HabitProvider = ({ children }) => {
 
     const [filterPriority, setFilterPriority] = useState("All")
     const [sortBy, setSortBy] = useState('none')
-    const [order, setOrder] = useState('ascending')
+    const [order, setOrder] = useState('Ascending')
 
     const addHabit = (title, priority) => {
        const newHabit = {
@@ -60,9 +60,40 @@ export const HabitProvider = ({ children }) => {
 
     const getFilteredHabits = () => {
         if (filterPriority === "All") {
-            return habits
+            return habits;
         } else {
-            return habits.filter(habit => habit.priority === filterPriority)        }
+            return habits.filter(habit => habit.priority.toLowerCase() === filterPriority.toLowerCase());
+        }
+    }
+
+    const getSortedHabits = (habitsToSort) => {
+        if (sortBy === "none") {
+            return habitsToSort;
+        }
+
+        const sorted = [...habitsToSort].sort((a, b) => {
+            if (sortBy === "Repetitions") {
+                return a.repetitions - b.repetitions;
+            }
+
+            if (sortBy === "Priority") {
+                const priorityOrder = { "low": 1, "medium": 2, "high": 3 };
+                return priorityOrder[a.priority.toLowerCase()] - priorityOrder[b.priority.toLowerCase()];
+            }
+
+            return 0;
+        });
+
+        if (order === "Descending") {
+            return sorted.reverse();
+        }
+        return sorted;
+    }
+
+        const getDisplayedHabits = () => {
+        const filtered = getFilteredHabits()
+        const sorted = getSortedHabits(filtered)
+        return sorted
     }
         return (
         <HabitContext.Provider value={{ 
@@ -83,13 +114,8 @@ export const HabitProvider = ({ children }) => {
             setSortBy, 
             order, 
             setOrder,
-            filterPriority, 
-            setFilterPriority,
-            sortBy, 
-            setSortBy,
-            order, 
-            setOrder
-             }}>
+            getDisplayedHabits
+    }}>
             {children}
         </HabitContext.Provider>
     );
