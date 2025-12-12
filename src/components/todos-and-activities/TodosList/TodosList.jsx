@@ -12,12 +12,12 @@ const TodosList = () => {
 
     return (
         <>
-        <div className="FilterAndSorting"><SortTodo /><FilterTodo /></div>
+        <div className={styles.sortAndFilter}><SortTodo /><FilterTodo /></div>
             <div className={styles.TodoList}>
                 <h2>Todo List</h2>
                 <ul>
-                    {visibleTodos.filter (todo => todo.status !== "Completed") .map((todo) => (
-                        <li key={todo.id}>
+                    {visibleTodos.map((todo) => (
+                        <li key={todo.id} className={todo.status === "Completed" ? styles.completed : styles.todoItem}>
                         <input type="checkbox" checked={todo.status === "Completed"} onChange={() => updateStatus(todo.id)} />
                         <h3>{todo.title}</h3>
                         <p>{todo.description}</p>
@@ -32,23 +32,6 @@ const TodosList = () => {
                 </ul>
                 {Show && <EditTodo/>}
             </div>
-        <div className={styles.completed}>
-            <h2>Completed Todos</h2>
-            <ul className={styles.completedList}>
-                {visibleTodos.filter (todo => todo.status === "Completed") .map((todo) => (
-                    <li key={todo.id}>
-                        <input type="checkbox" checked={todo.status === "Completed"} onChange={() => updateStatus(todo.id)} />
-                        <h3>{todo.title}</h3>
-                        <p>{todo.description}</p>
-                        <p>Status: {todo.status}</p>
-                        <p>Estimated Time: {todo.estimatedTime}</p>
-                        <p>Category: {todo.category}</p>
-                        <p>Deadline: {todo.deadline}</p>
-                        <button className={styles.RemoveBtn} onClick={() => {removeTodo(todo.id)}}>Remove</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
         </>
     );
 }

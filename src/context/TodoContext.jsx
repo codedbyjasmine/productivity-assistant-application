@@ -8,7 +8,7 @@ const TodoProvider = ({ children }) => {
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [statusFilter, setStatusFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
-  const [sortOption, setSortOption] = useState("DeadlineAsc");
+  const [sortOption, setSortOption] = useState("StatusAsc");
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -43,6 +43,8 @@ const TodoProvider = ({ children }) => {
 
   const getFilteredAndSortedTodos = () => {
     let filteredTodos = [...todos];
+    const timeEstimateOrder = { "Minutes": 1, "Hours": 2, "Days": 3 };
+    const statusOrder = { "Pending": 1, "Completed": 2 };
 
     if (statusFilter !== "All") {
       filteredTodos = filteredTodos.filter(todo => todo.status === statusFilter);
@@ -60,16 +62,16 @@ const TodoProvider = ({ children }) => {
         filteredTodos.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
         break;
       case "TimeEstimateAsc":
-        filteredTodos.sort((a, b) => b.estimatedTime.localeCompare(a.estimatedTime));
+        filteredTodos.sort((a, b) => timeEstimateOrder[a.estimatedTime] - timeEstimateOrder[b.estimatedTime]);
         break;
       case "TimeEstimateDesc":
-        filteredTodos.sort((a, b) => a.estimatedTime.localeCompare(b.estimatedTime));
+        filteredTodos.sort((a, b) => timeEstimateOrder[b.estimatedTime] - timeEstimateOrder[a.estimatedTime]);
         break;
       case "StatusAsc":
-        filteredTodos.sort((a, b) => a.status.localeCompare(b.status));
+        filteredTodos.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
         break;
       case "StatusDesc":
-        filteredTodos.sort((a, b) => b.status.localeCompare(a.status));
+        filteredTodos.sort((a, b) => statusOrder[b.status] - statusOrder[a.status]);
         break;
       default:
         break;
