@@ -30,3 +30,22 @@
     gap: 15px;
     justify-content: flex-end;
 }
+
+.EditBtn {
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: FontAwesome, sans-serif;
+}
+
+.RemoveBtn {
+    background-color: #ce1e1e;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: FontAwesome, sans-serif;
+}
