@@ -1,13 +1,17 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FakeUserList } from "../components/event-planner/fake-user-list/fakeUserList";
 
 export const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
     const navigate = useNavigate()
     const [users,setUsers] = useState([])
-    const [currentUser, setCurrentUser] = useState(null) //isLoggenIn / setIsLoggenIn
+    const [currentUser, setCurrentUser] = useState(null)
+
+    const [usernameErr,setUsernameErr] = useState(false)
+    const [passwordErr,setPasswordErr] = useState(false)
+    const [confirmErr,setConfirmErr] = useState(false)
+    const [userErr,setUserErr] = useState(false)
 
     // ========= Användare ========== //
     
@@ -24,24 +28,63 @@ const AuthProvider = ({children}) => {
     },[])
     
     const handleLogin = (username,password) => {
-        if(!username || !password) return alert ("fill in fields")
-            
+        setUsernameErr(false)
+        setPasswordErr(false)
+        setUserErr(false)
+        
+        if(!username && !password) {
+            setUsernameErr(true)
+            setPasswordErr(true)
+            return;
+        }
+
+        if(!username && password) {setUsernameErr(true); return}
+        if(!password && username) {setPasswordErr(true); return}
+
         const user = users.find(u => u.username === username && u.password === password)
 
+        if(!user) {setUserErr(true); return}
+        
         if(user){
             setCurrentUser(user)
             sessionStorage.setItem("currentUser",JSON.stringify(user))
             navigate("/home")
-        } else {
-            alert("Invalid credentials")
         }
     }
 
-    const handleRegister = (username,password) => {
-        if(!username || !password) return alert ("fill in fields")
+    const handleRegister = (username,password,confirmP) => {
+        setUsernameErr(false)
+        setPasswordErr(false)
+        setConfirmErr(false)
+        setUserErr(false)
+
+        if(!username && !password && !confirmP){
+            setUsernameErr(true)
+            setPasswordErr(true)
+            setConfirmErr(true)
+            return;
+        }
+        if(!username && password && confirmP) {
+            setUsernameErr(true); return}
+
+        if(username && !password && !confirmP) {
+            setPasswordErr(true); 
+            setConfirmErr(true);
+            return
+        }
+
+        if(username && !password && confirmP) {
+            setPasswordErr(true)
+            return
+        }
+        if(username && password && !confirmP){
+            setConfirmErr(true)
+            return;
+        }
+        if(password !== confirmP) {setConfirmErr(true); return}
 
         const existingUser = users.find(u => u.username === username)
-        if(existingUser) return alert("Username already exists")
+        if(existingUser) {setUserErr(true); return}
 
         const newUser = {
             id: crypto.randomUUID(),
@@ -54,11 +97,9 @@ const AuthProvider = ({children}) => {
         
         setUsers([...users,newUser])
         setCurrentUser(newUser)
-        
         localStorage.setItem("users", JSON.stringify([...users,newUser]))
         sessionStorage.setItem("currentUser", JSON.stringify(newUser))
-        
-        alert ("Registration successful")
+
         navigate("/")
     }
 
@@ -239,7 +280,11 @@ const AuthProvider = ({children}) => {
 
     return (
         <AuthContext.Provider 
-        value={{users, currentUser, setUsers,
+        value={{users, currentUser, setUsers, 
+        usernameErr, setUsernameErr,
+        passwordErr, setPasswordErr,
+        userErr, setUserErr,
+        confirmErr,setConfirmErr,
         handleLogin, handleRegister, handleLogout,
         addEvent, updateEvent, deleteEvent,
         onEdit, setOnEdit,
