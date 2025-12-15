@@ -1,14 +1,22 @@
+import { useContext } from "react";
+import Header from "../components/header/Header";
+import { AuthContext } from "../context/Context";
 import Todos from "../components/todos-and-activities/Todos/Todos";
 import Habits from '../components/habits/Habits.jsx'
 
+
 const HomePage = () => {
-  return (
-    <div>
-      <h1>Welcome to the Productivity Assistant</h1>
+    const {currentUser,handleLogout} = useContext(AuthContext)
+
+    return(
+        <>
+        <h1>Hello, {currentUser?.username}</h1>
+        <button onClick={handleLogout}>Log Out</button>
+        <Header/>
         <Todos />
         <Habits />
-    </div>
-  );
-};
+        </>
+    )
+}
 
-export default HomePage;
+export default HomePage
