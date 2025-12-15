@@ -142,12 +142,108 @@ const AuthProvider = ({children}) => {
         sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
     }
 
+    // ========= Todos ========= // 
+
+    const addUserTodo = (title, description, status, estimatedTime, category, deadline) => {
+        if(!currentUser) return;
+
+        const newTodo = {
+            id: crypto.randomUUID(),
+            title,
+            description,
+            status,
+            estimatedTime,
+            category,
+            deadline
+        };
+
+        // Lägg till todo i användarens todo lista
+        const updatedUser = {
+            ...currentUser,
+            todos: [...currentUser.todos, newTodo]
+        }
+
+        // Uppdatera användaren i users-arrayen
+        const updatedUsers = users.map(user => 
+            user.id === currentUser.id ? updatedUser : user
+        )
+
+        setUsers(updatedUsers)
+        setCurrentUser(updatedUser)
+        localStorage.setItem("users", JSON.stringify(updatedUsers))
+        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
+    }
+
+    const updateUserTodoStatus = (id) => {
+        if(!currentUser) return;
+
+        const updatedTodos = currentUser.todos.map(todo => 
+            todo.id === id ? { ...todo, status: todo.status === "Completed" ? "Pending" : "Completed" } : todo
+        );
+
+        const updatedUser = {
+            ...currentUser,
+            todos: updatedTodos
+        };
+
+        const updatedUsers = users.map(user => 
+            user.id === currentUser.id ? updatedUser : user
+        );
+
+        setUsers(updatedUsers);
+        setCurrentUser(updatedUser);
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
+    };
+
+    const removeUserTodo = (id) => {
+        if(!currentUser) return;
+
+        const updatedTodos = currentUser.todos.filter(todo => todo.id !== id);
+
+        const updatedUser = {
+            ...currentUser,
+            todos: updatedTodos
+        };
+
+        const updatedUsers = users.map(user => 
+            user.id === currentUser.id ? updatedUser : user
+        );
+
+        setUsers(updatedUsers);
+        setCurrentUser(updatedUser);
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
+    };
+
+    const updateUserTodo = (id, updatedTodo) => {
+        if(!currentUser) return;
+
+        const updatedTodos = currentUser.todos.map(todo => 
+            todo.id === id ? { ...todo, ...updatedTodo } : todo
+        );
+
+        const updatedUser = {
+            ...currentUser,
+            todos: updatedTodos
+        };
+
+        const updatedUsers = users.map(user => 
+            user.id === currentUser.id ? updatedUser : user
+        );
+        setUsers(updatedUsers);
+        setCurrentUser(updatedUser);
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
+    }
+
     return (
         <AuthContext.Provider 
         value={{users, currentUser, setUsers,
         handleLogin, handleRegister, handleLogout,
         addEvent, updateEvent, deleteEvent,
-        onEdit, setOnEdit
+        onEdit, setOnEdit,
+        addUserTodo, updateUserTodoStatus, removeUserTodo, updateUserTodo
         }}>
             {children}
         </AuthContext.Provider>

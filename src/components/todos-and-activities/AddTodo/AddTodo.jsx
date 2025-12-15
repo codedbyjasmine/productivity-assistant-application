@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { TodoContext } from "../../../context/TodoContext";
+import { AuthContext } from "../../../context/Context";
 import styles from './AddTodo.module.css';
 
 const AddTodo = () => {
@@ -11,7 +11,7 @@ const AddTodo = () => {
     const [category, setCategory] = useState("");
     const [deadline, setDeadline] = useState("");
 
-  const { addTodo } = useContext(TodoContext);
+  const { addUserTodo } = useContext(AuthContext);
 
   return (
     <div className={styles.addTodoContainer}>
@@ -33,7 +33,7 @@ const AddTodo = () => {
         <option value="Health">Health</option>
       </select>
         <input type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
-        <button onClick={() => {addTodo("defaultUser", title, description, status, estimatedTime, category, deadline);
+        <button onClick={() => {addUserTodo(title, description, status, estimatedTime, category, deadline);
             setTitle("");
             setDescription("");
             setEstimatedTime("");

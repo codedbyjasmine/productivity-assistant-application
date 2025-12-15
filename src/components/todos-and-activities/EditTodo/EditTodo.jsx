@@ -1,11 +1,14 @@
 import { use, useContext, useState } from "react";
+import { AuthContext } from "../../../context/Context";
 import { TodoContext } from "../../../context/TodoContext";
 
 const EditTodo = () => {
 
-    const { todos, updateTodo, editingTodoId, setEditingTodoId } = useContext(TodoContext);
+    
+  const { editingTodoId, setEditingTodoId } = useContext(TodoContext);
+  const { currentUser, updateUserTodo } = useContext(AuthContext);
 
-    const todo = todos.find(todo => todo.id === editingTodoId);
+    const todo = currentUser.todos.find(todo => todo.id === editingTodoId);
 
     if (!todo) return null;
 
@@ -17,7 +20,7 @@ const EditTodo = () => {
     const [deadline, setDeadline] = useState(todo.deadline);
 
     const handleSave = () => {
-        updateTodo(editingTodoId, {
+        updateUserTodo(editingTodoId, {
             title,
             description,
             status,

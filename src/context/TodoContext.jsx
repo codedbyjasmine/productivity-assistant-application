@@ -1,45 +1,15 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { AuthContext } from "./Context";
 
 export const TodoContext = createContext();
 
 const TodoProvider = ({ children }) => {
-
-  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")) || []);
+  const { currentUser } = useContext(AuthContext);
+  const todos = currentUser?.todos || [];
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [statusFilter, setStatusFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [sortOption, setSortOption] = useState("StatusAsc");
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
-  const addTodo = (user, title, description, status, estimatedTime, category, deadline) => {
-
-    const newTodo = {
-        id: Date.now(),
-        user,
-        title,
-        description,
-        status,
-        estimatedTime,
-        category,
-        deadline
-    };
-    setTodos([...todos, newTodo]);
-  };
-
-  const updateStatus = (id) => {
-    setTodos(todos.map(todo => todo.id === id ? { ...todo, status: todo.status === "Completed" ? "Pending" : "Completed" } : todo));
-  }
-
-  const removeTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
-  };
-
-  const updateTodo = (id, updatedTodo) => {
-    setTodos(todos.map(todo => todo.id === id ? { ...todo, ...updatedTodo } : todo));
-  };
 
   const getFilteredAndSortedTodos = () => {
     let filteredTodos = [...todos];
@@ -81,7 +51,7 @@ const TodoProvider = ({ children }) => {
   }
 
   return (
-    <TodoContext.Provider value={{ todos, addTodo, updateStatus, removeTodo, updateTodo, editingTodoId, setEditingTodoId, statusFilter, setStatusFilter, categoryFilter, setCategoryFilter, sortOption, setSortOption, getFilteredAndSortedTodos }}>
+    <TodoContext.Provider value={{ editingTodoId, setEditingTodoId, statusFilter, setStatusFilter, categoryFilter, setCategoryFilter, sortOption, setSortOption, getFilteredAndSortedTodos }}>
       {children}
     </TodoContext.Provider>
   );
