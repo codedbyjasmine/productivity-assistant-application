@@ -13,8 +13,6 @@ const HomePage = () => {
         <h1>Hello, {currentUser?.username}</h1>
         <button onClick={handleLogout}>Log Out</button>
         <Header/>
-        <Todos />
-        <Habits />
         </>
     )
 }

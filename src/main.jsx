@@ -5,15 +5,18 @@ import App from './App.jsx'
 import {BrowserRouter} from "react-router-dom";
 import AuthProvider from './context/Context.jsx';
 import TodoProvider from './context/TodoContext.jsx'
+import HabitProvider from './context/Habitcontext.jsx';
 
 createRoot(document.getElementById('root')).render(
 
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <TodoProvider>
-      <App />
-    </TodoProvider>
+        <HabitProvider>
+          <TodoProvider>
+            <App />
+          </TodoProvider>
+        </HabitProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>,

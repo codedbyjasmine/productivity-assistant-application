@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 export const HabitContext = createContext();
 
-export const HabitProvider = ({ children }) => {
+const HabitProvider = ({ children }) => {
     
     const [title, setTitle] = useState("");
     const [priority, setPriority] = useState("Medium");
@@ -121,5 +121,6 @@ export const HabitProvider = ({ children }) => {
     );
 }
 
+export default HabitProvider;
 
 

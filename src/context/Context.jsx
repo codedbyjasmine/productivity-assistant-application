@@ -47,7 +47,9 @@ const AuthProvider = ({children}) => {
             id: crypto.randomUUID(),
             username,
             password,
-            events: []
+            events: [],
+            todos: [],
+            habits: [],
         }
         
         setUsers([...users,newUser])
