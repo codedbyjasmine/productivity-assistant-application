@@ -1,8 +1,10 @@
 import { useContext } from "react"
 import { TodoContext } from "../../context/TodoContext"
+import { HabitContext } from "../../context/Habitcontext";
 
 const Overview = () => {
     const { overviewTodos } = useContext(TodoContext);
+    const { overviewHabits } = useContext(HabitContext);
 
     return(
         <div>
@@ -21,6 +23,15 @@ const Overview = () => {
             </div>
             <div>
                 <h2>Your most repeated habits</h2>
+                <ul>
+                    {overviewHabits().map((habit) => (
+                        <li key={habit.id}>
+                            <h3>Title: {habit.title}</h3>
+                            <p>Repetitions: {habit.repetitions}</p>
+                        </li>
+                    ))}
+                </ul>
+
             </div>
             <div>
                 <h2>Upcoming events</h2>

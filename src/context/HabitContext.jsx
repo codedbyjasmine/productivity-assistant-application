@@ -101,6 +101,11 @@ const HabitProvider = ({ children }) => {
         const sorted = getSortedHabits(filtered)
         return sorted
     }
+
+        const overviewHabits = () => {
+        return habits.sort((a, b) => b.repetitions - a.repetitions).slice(0, 3);
+    }
+
         return (
         <HabitContext.Provider value={{ 
              
@@ -116,7 +121,8 @@ const HabitProvider = ({ children }) => {
             setSortBy, 
             order, 
             setOrder,
-            getDisplayedHabits
+            getDisplayedHabits,
+            overviewHabits
     }}>
             {children}
         </HabitContext.Provider>

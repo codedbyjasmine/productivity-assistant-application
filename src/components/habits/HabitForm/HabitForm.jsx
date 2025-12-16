@@ -1,13 +1,13 @@
 import { useContext } from "react"
-import { HabitContext } from "../../context/Habitcontext"
-import { AuthContext } from "../../context/Context"
+import { HabitContext } from "../../../context/Habitcontext"
+import { AuthContext } from "../../../context/Context"
 
 const HabitForm = () => {
 
 const { title, setTitle,priority, setPriority } = useContext(HabitContext)
 const { addHabit } = useContext(AuthContext);    
     return(
-        <div>
+        <div className="form-container">
             <h3>Add new Habit</h3>
             <h3>{title}</h3>
             <input type="text" placeholder="Enter habit name" onChange={(e) => setTitle(e.target.value)} required/>
