@@ -278,6 +278,127 @@ const AuthProvider = ({children}) => {
         sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
     }
 
+        // ============ HABITS ============ //
+
+    const addHabit = (title, priority) => {
+        // console.log("Adding habit:", title, priority);
+        if(!currentUser) return;
+        const newHabit = {
+                    
+        id: crypto.randomUUID(), 
+        title, 
+        priority, 
+        repetitions: 0
+
+    }
+                
+    const updatedUser = {
+        ...currentUser,
+        habits: [...currentUser.habits, newHabit]
+    }
+
+    const updatedUsers = users.map(user => 
+        user.id === currentUser.id ? updatedUser : user
+        )
+
+        setUsers(updatedUsers)
+        setCurrentUser(updatedUser)
+        localStorage.setItem("users", JSON.stringify(updatedUsers))
+        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
+    }
+
+    const removeHabit = (id) => {
+        if(!currentUser) return;
+
+        const updatedHabits = currentUser.habits.filter(habit => habit.id !==id);
+
+        const updatedUser = {
+            ...currentUser,
+            habits: updatedHabits
+        };
+
+        const updatedUsers = users.map(user => 
+            user.id === currentUser.id ? updatedUser : user
+        );
+
+        setUsers(updatedUsers);
+        setCurrentUser(updatedUser);
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
+    };
+
+    const increaseReps = (id) => {
+        if(!currentUser) return;
+        const updatedHabits = currentUser.habits.map(habit => {
+            if (habit.id === id) {
+                return { ...habit, repetitions: habit.repetitions + 1 };
+            }
+            return habit;
+        });
+
+        const updatedUser = {
+            ...currentUser,
+            habits: updatedHabits
+        };
+
+        const updatedUsers = users.map(user => 
+            user.id === currentUser.id ? updatedUser : user
+        );
+
+        setUsers(updatedUsers);
+        setCurrentUser(updatedUser);
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
+    };
+
+    const decreaseReps = (id) => {
+        if(!currentUser) return
+        const updatedHabits = currentUser.habits.map(habit => {
+            if (habit.id === id && habit.repetitions > 0) {
+                return { ...habit, repetitions: habit.repetitions - 1 };
+            }
+            return habit;
+        })
+
+        const updatedUser = {
+            ...currentUser,
+            habits: updatedHabits
+        }
+        const updatedUsers = users.map(user => 
+            user.id === currentUser.id ? updatedUser : user
+        )
+
+        setUsers(updatedUsers)
+        setCurrentUser(updatedUser)
+        localStorage.setItem("users", JSON.stringify(updatedUsers))
+        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
+    }
+
+    const resetReps = (id) => {
+        if(!currentUser) return
+        const updatedHabits = currentUser.habits.map(habit => {
+            if(habit.id === id) {
+                return { ...habit, repetitions: 0 };
+            }
+            return habit;
+        })
+
+        const updatedUser = {
+            ...currentUser,
+            habits: updatedHabits
+        }
+
+        const updatedUsers = users.map(user => 
+            user.id === currentUser.id ? updatedUser : user
+        )
+
+        setUsers(updatedUsers)
+        setCurrentUser(updatedUser)
+        localStorage.setItem("users", JSON.stringify(updatedUsers))
+        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
+    }
+
+
     return (
         <AuthContext.Provider 
         value={{users, currentUser, setUsers, 
@@ -288,7 +409,9 @@ const AuthProvider = ({children}) => {
         handleLogin, handleRegister, handleLogout,
         addEvent, updateEvent, deleteEvent,
         onEdit, setOnEdit,
-        addUserTodo, updateUserTodoStatus, removeUserTodo, updateUserTodo
+        addUserTodo, updateUserTodoStatus, removeUserTodo,
+        updateUserTodo, addHabit, removeHabit, increaseReps,
+        decreaseReps, resetReps
         }}>
             {children}
         </AuthContext.Provider>

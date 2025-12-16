@@ -1,62 +1,68 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
+import { AuthContext } from "./Context";
 
 export const HabitContext = createContext();
 
 const HabitProvider = ({ children }) => {
     
+    const { currentUser } = useContext(AuthContext);
     const [title, setTitle] = useState("");
     const [priority, setPriority] = useState("Medium");
-    const [habits, setHabits] = useState([
-        { id: 1, title: "Morning Run", priority: "High", repetitions: 5 },
-        { id: 2, title: "Read Book", priority: "Medium", repetitions: 3 },
-    ]);
+    const [habits, setHabits] = useState([]);
+
+
+    useEffect(() => {
+        if (currentUser?.habits) {
+            setHabits(currentUser.habits);
+        }
+    }, [currentUser?.habits]);
 
     const [filterPriority, setFilterPriority] = useState("All")
     const [sortBy, setSortBy] = useState('none')
     const [order, setOrder] = useState('Ascending')
 
-    const addHabit = (title, priority) => {
-       const newHabit = {
-            id: Date.now(), 
-            title, 
-            priority, 
-            repetitions: 0
-        }
-        setHabits([...habits, newHabit]);
-        setTitle("")
-    }
+    // const addHabit = (title, priority) => {
+    //    const newHabit = {
+    //         id: Date.now(), 
+    //         title, 
+    //         priority, 
+    //         repetitions: 0
+    //     }
+    //     setHabits([...habits, newHabit]);
+    //     setTitle("")
+    // }
 
-    const removeHabit = (id) => {
-        setHabits(habits.filter(habit => habit.id !== id))
-    }
+    // const removeHabit = (id) => {
+    //     setHabits(habits.filter(habit => habit.id !== id))
+    // }
 
-    const increaseReps = (id) => {
-        setHabits(habits.map(habit => {
-            if (habit.id === id) {
-                return { ...habit, repetitions: habit.repetitions + 1 };
-            }
-            return habit;
-        }))
-    }
+    // const increaseReps = (id) => {
+    //     setHabits(habits.map(habit => {
+    //         if (habit.id === id) {
+    //             return { ...habit, repetitions: habit.repetitions + 1 };
+    //         }
+    //         return habit;
+    //     }))
+    // }
 
-    const decreaseReps = (id) => {
-        setHabits(habits.map(habit => {
-            if (habit.id === id && habit.repetitions > 0) {
-                return { ...habit, repetitions: habit.repetitions - 1 };
-            }
-            return habit;
-        }))
-    }
+    // const decreaseReps = (id) => {
+    //     setHabits(habits.map(habit => {
+    //         if (habit.id === id && habit.repetitions > 0) {
+    //             return { ...habit, repetitions: habit.repetitions - 1 };
+    //         }
+    //         return habit;
+    //     }))
+    // }
 
-    const resetReps = (id) => {
-        setHabits(habits.map(habit => {
-            if(habit.id === id) {
-                return { ...habit, repetitions: 0 };
-            }
-            return habit;
-        }))
+    // const resetReps = (id) => {
+    //     setHabits(habits.map(habit => {
+    //         if(habit.id === id) {
+    //             return { ...habit, repetitions: 0 };
+    //         }
+    //         return habit;
+    //     }))
 
-    }
+    // }
 
     const getFilteredHabits = () => {
         if (filterPriority === "All") {
@@ -97,17 +103,13 @@ const HabitProvider = ({ children }) => {
     }
         return (
         <HabitContext.Provider value={{ 
-            increaseReps, 
-            decreaseReps, 
-            resetReps, 
-            habits, 
-            removeHabit, 
+             
+            habits,  
             setHabits, 
             title, 
             setTitle, 
             priority, 
             setPriority, 
-            addHabit, 
             filterPriority, 
             setFilterPriority, 
             sortBy, 

@@ -1,15 +1,16 @@
 import { useContext } from "react"
 import { HabitContext } from "../../context/Habitcontext";
+import { AuthContext } from "../../context/Context";
 
 const HabitItem = () => {
 
-const { removeHabit, increaseReps, decreaseReps, resetReps, getDisplayedHabits } = useContext(HabitContext);
-
-const displayedHabits = getDisplayedHabits();
+const { getDisplayedHabits } = useContext(HabitContext);
+const { removeHabit, decreaseReps, increaseReps, resetReps, currentUser} = useContext(AuthContext);
+const displayedHabits = currentUser?.habits ? getDisplayedHabits(currentUser.habits) : [];
 
     return(
         <div>
-                {displayedHabits.map((habit, priority) => (
+                {displayedHabits.map((habit) => (
                 <div key={habit.id}>
                     <h3>{habit.title}</h3>
                     <button onClick={() => removeHabit(habit.id)}>Delete</button>
