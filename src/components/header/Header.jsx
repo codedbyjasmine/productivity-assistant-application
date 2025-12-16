@@ -4,6 +4,7 @@ import EventPlanner from "../event-planner/EventPlanner"
 import Todos from "../todos-and-activities/Todos/Todos"
 import Overview from "../overview/Overview"
 import { AuthContext } from "../../context/Context"
+import Habits from "../habits/Habits/Habits"
 
 const Header = () => {
 

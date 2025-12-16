@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import HabitForm from "../HabitForm/HabitForm.jsx"
 import HabitItem from "../HabitItem/HabitItem.jsx";
-import SortHabits from "../SortHabits.jsx";
+import SortHabits from "../SortHabits/SortHabits.jsx";
 import { HabitContext } from "../../../context/Habitcontext.jsx";
 
 
