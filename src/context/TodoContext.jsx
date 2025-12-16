@@ -50,8 +50,12 @@ const TodoProvider = ({ children }) => {
     return filteredTodos;
   }
 
+  const overviewTodos = () => {  
+    return todos.filter(todo => todo.status === "Pending").slice(-3).reverse();
+  };
+
   return (
-    <TodoContext.Provider value={{ editingTodoId, setEditingTodoId, statusFilter, setStatusFilter, categoryFilter, setCategoryFilter, sortOption, setSortOption, getFilteredAndSortedTodos }}>
+    <TodoContext.Provider value={{ editingTodoId, setEditingTodoId, statusFilter, setStatusFilter, categoryFilter, setCategoryFilter, sortOption, setSortOption, getFilteredAndSortedTodos, overviewTodos }}>
       {children}
     </TodoContext.Provider>
   );
