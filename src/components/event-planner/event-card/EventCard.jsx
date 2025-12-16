@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { AuthContext } from "../../../context/Context"
 import s from './EventCard.module.css'
 
-const EventCard = ({event}) => {
+const EventCard = ({event,isPast}) => {
     const {setOnEdit, deleteEvent} = useContext(AuthContext)
 
     const dayMonthYear = (dateString) => {
@@ -21,16 +21,21 @@ const EventCard = ({event}) => {
     }
 
     return(
-        <div className={s.cardWrapper}>
-            <div className={s.cardInfoDate}>
+        <div className={isPast ? s.cardWrapperPast : s.cardWrapper}>
+            <div className={isPast ? s.cardInfoDatePast : s.cardInfoDate}>
                 <p>{dayMonthYear(event.startDate)}</p>
             </div>
-            <div className={s.cardContainer}>
-                <div className={s.cardInfo}>
-                    <h3>{event.eventName}</h3>
-                </div>
-                <div className={s.cardInfo}>
-                    <p>{dayAndTime(event.startDate)}</p>
+            <div className={isPast ? s.cardContainerPast : s.cardContainer}>
+                <h3>{event.eventName}</h3>
+                <div className={s.cardInfoWrapper}>
+                    <div className={isPast ? s.cardInfoPast1 : s.cardInfo1}>
+                        <p>Start:</p>
+                        <p>End:</p>
+                    </div>
+                    <div className={isPast ? s.cardInfoPast2 : s.cardInfo2}>
+                        <p>{dayAndTime(event.startDate)}</p>
+                        <p>{dayAndTime(event.endDate)}</p>
+                    </div>
                 </div>
             </div>
             <div className={s.cardBtns}>

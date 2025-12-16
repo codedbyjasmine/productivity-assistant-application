@@ -1,7 +1,8 @@
-.cardWrapper {
+.cardWrapper,
+.cardWrapperPast {
   display: flex;
   width: 450px;
-  height: 160px;
+  height: 120px;
   background: linear-gradient(to right, #f8f9fa 0%, #ffffff 100%);
   border: 1px solid #d8d8d8;
   border-left: 4px solid #000000;
@@ -9,19 +10,18 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cardInfo,
-.cardInfoDate {
+.cardInfoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.cardInfoDate,
+.cardInfoDatePast {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.cardInfo h3 {
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.cardInfoDate {
   background: linear-gradient(135deg, #4594e9 0%, #1d4ed8 100%);
   border-radius: none;
   gap: 0.5rem;
@@ -29,6 +29,9 @@
   width: 35%;
 }
 
+.cardInfoDatePast {
+  background: linear-gradient(135deg, #cecece 0%, #d6d6d6 100%);
+}
 .cardInfoDate p {
   color: white;
   font-size: 14px;
@@ -37,11 +40,65 @@
   letter-spacing: 0.5px;
 }
 
-.cardContainer {
+.cardInfoDatePast p {
+  color: rgb(214, 87, 82);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.cardInfo1,
+.cardInfoPast1 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+  width: 25%;
+  align-items: start;
+  justify-content: flex-start;
+}
+.cardInfo2,
+.cardInfoPast2 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+  width: 75%;
+  align-items: start;
+  justify-content: flex-start;
+}
+
+.cardInfo1 p,
+.cardInfo2 p {
+  margin: 0;
+  color: rgb(188, 188, 188);
+}
+
+.cardInfoPast1 p,
+.cardInfoPast2 p {
+  margin: 0;
+  color: rgb(214, 87, 82);
+}
+
+.cardContainer h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 5px;
+}
+
+.cardContainerPast h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 5px;
+  color: rgb(214, 87, 82);
+}
+
+.cardContainer,
+.cardContainerPast {
   display: flex;
   flex-direction: column;
   width: 65%;
   padding: 1rem;
+  padding-bottom: 0;
   background: white;
 }
 

@@ -1,10 +1,14 @@
 import { useContext } from "react"
 import { TodoContext } from "../../context/TodoContext"
 import { HabitContext } from "../../context/Habitcontext";
+import { AuthContext } from "../../context/Context";
 
 const Overview = () => {
     const { overviewTodos } = useContext(TodoContext);
     const { overviewHabits } = useContext(HabitContext);
+    const {currentUser} = useContext(AuthContext)
+
+    const overviewEvents = currentUser?.events.sort((a,b) =>new Date(a.startDate) - new Date (b.startDate));
 
     return(
         <div>
@@ -35,6 +39,15 @@ const Overview = () => {
             </div>
             <div>
                 <h2>Upcoming events</h2>
+                <ul>
+                    {
+                        overviewEvents?.map((e)=>
+                        <li key={e.id}>
+                            <h3>{e.eventName}</h3>
+                            <p>{e.startDate}</p>
+                        </li>)
+                    }
+                </ul>
             </div>
         </div>
     )

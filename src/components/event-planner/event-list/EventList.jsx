@@ -2,7 +2,7 @@ import EventCard from "../event-card/EventCard"
 import s from './EventList.module.css'
 
 
-const EventList = ({events}) => {
+const EventList = ({events,isPast}) => {
 
     if(events.length===0){
         return (
@@ -18,7 +18,7 @@ const EventList = ({events}) => {
     <div>
         <div className={s.listContainer}>
             {sortedEvents.map((event)=> 
-                <EventCard key={event.id} event={event}/>)
+                <EventCard key={event.id} event={event} isPast={isPast}/>)
             }
         </div>
     </div>

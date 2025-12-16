@@ -132,8 +132,8 @@ const AuthProvider = ({children}) => {
         const updatedUsers = users.map(user => 
             user.id === currentUser.id ? updatedUser : user
         )
-        
-        setUsers(updatedUsers)
+
+        setUsers(updatedUsers);
         setCurrentUser(updatedUser)
         localStorage.setItem("users", JSON.stringify(updatedUsers))
         sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
