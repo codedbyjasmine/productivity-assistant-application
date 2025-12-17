@@ -4,31 +4,29 @@ import EventForm from "./event-form/EventForm"
 import { AuthContext } from "../../context/Context"
 import { useContext } from "react"
 import s from './EventPlanner.module.css'
+import { EventContext } from "../../context/EventContext"
 
 const EventPlanner = () => {
-    const {currentUser} = useContext(AuthContext)
+    const {upcomingEvents,pastEvents} = useContext(EventContext)
     const [showUpcomingEvents,setShowUpcomingEvents] = useState(true)
     const [showPastEvents,setShowPastEvents] = useState(false)
-
-    const today = new Date();
-    
-    const upcomingEvents = currentUser?.events.filter((e)=> new Date(e.endDate) >= today)
-    const pastEvents = currentUser?.events.filter ((e)=> new Date(e.endDate) < today)
 
     return (
         <div>
             <EventForm />
             <div>
-                <h2 onClick={()=>setShowUpcomingEvents(!showUpcomingEvents)}>Kommande händelser</h2>
-                {showUpcomingEvents &&
-                    <EventList events={upcomingEvents} isPast={false}/>
-                }
-            </div>
-            <div>
-                <h2 onClick={()=>setShowPastEvents(!showPastEvents)}>Passerade händelser</h2>
-                {showPastEvents &&
-                    <EventList events={pastEvents} isPast={true} />
-                }
+                <div>
+                    <h2 onClick={()=>setShowUpcomingEvents(!showUpcomingEvents)}>Kommande händelser</h2>
+                    {showUpcomingEvents &&
+                        <EventList events={upcomingEvents()} isPast={false}/>
+                    }
+                </div>
+                <div>
+                    <h2 onClick={()=>setShowPastEvents(!showPastEvents)}>Passerade händelser</h2>
+                    {showPastEvents &&
+                        <EventList events={pastEvents()} isPast={true} />
+                    }
+                </div>
             </div>
         </div>
     )

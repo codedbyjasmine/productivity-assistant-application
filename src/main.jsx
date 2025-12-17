@@ -5,7 +5,8 @@ import App from './App.jsx'
 import {BrowserRouter} from "react-router-dom";
 import AuthProvider from './context/Context.jsx';
 import TodoProvider from './context/TodoContext.jsx'
-import HabitProvider from './context/Habitcontext.jsx';
+import HabitProvider from './context/HabitContext.jsx';
+import EventProvider from './context/EventContext.jsx';
 
 createRoot(document.getElementById('root')).render(
 
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')).render(
       <AuthProvider>
         <HabitProvider>
           <TodoProvider>
-            <App />
+            <EventProvider>
+              <App />
+            </EventProvider>
           </TodoProvider>
         </HabitProvider>
       </AuthProvider>

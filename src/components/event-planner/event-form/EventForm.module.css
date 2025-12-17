@@ -55,12 +55,22 @@
   font-size: 14px;
 }
 
-.inputContainer input {
+.eventInput,
+.eventInputErr {
   padding: 0.6rem;
   outline: none;
   transition: border-color 0.2s ease;
   font-size: 14px;
   border-radius: 8px;
   height: 20px;
+}
+.eventInput {
   border: 1px solid rgb(232, 232, 232);
+}
+.eventInputErr {
+  border: 1px solid rgb(214, 87, 82);
+}
+
+.errorMessage {
+  color: rgb(214, 87, 82);
 }

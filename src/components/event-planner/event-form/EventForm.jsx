@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../../context/Context"
 import s from './EventForm.module.css'
+import { EventContext } from "../../../context/EventContext"
 
 const EventForm = () => {
-    const {onEdit, setOnEdit, addEvent, updateEvent} = useContext(AuthContext)
+    const {addEvent, updateEvent} = useContext(AuthContext)
+    const {onEdit,setOnEdit,hasErr,setHasErr,hasDateErr,setHasDateErr} = useContext(EventContext)
 
     const [eventName,setEventName] = useState("")
     const [startDate,setStartDate] = useState("")
@@ -26,8 +28,30 @@ const EventForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(!eventName || !startDate || !endDate) return alert ("Please fill in all fields")
-        if(startDate >= endDate) return alert("End date must be after start date")
+        setHasErr(false)
+        setHasDateErr(false)
+        
+        if(!eventName || !startDate || !endDate)  {
+            setHasErr(true)
+            setHasDateErr(true)
+            return;
+        }
+        if(!eventName) {
+            setHasErr(true)
+            return;
+        }
+
+        if(startDate >= endDate) {
+            setHasDateErr(true)
+            return;
+        }
+
+        const today = new Date()
+
+        if(new Date(startDate) < today || new Date(endDate) < today) {
+            setHasDateErr(true)
+            return;
+        }
         
         const newEvent = {
             eventName,
@@ -68,9 +92,12 @@ const EventForm = () => {
                     <div className={s.inputContainer}>
                         <input
                         type="text"
+                        className={hasErr ? s.eventInputErr : s.eventInput}
                         id="eventName"
                         value={eventName}
-                        onChange={(e)=> setEventName(e.target.value)} />
+                        onChange={(e)=> {
+                            setHasErr(false)
+                            setEventName(e.target.value)}} />
                     </div>
                 </div>
 
@@ -79,9 +106,12 @@ const EventForm = () => {
                     <div className={s.inputContainer}>
                         <input
                         type="datetime-local"
+                        className={hasDateErr ? s.eventInputErr : s.eventInput}
                         id="startDate"
                         value={startDate}
-                        onChange={(e)=>setStartDate(e.target.value)} />
+                        onChange={(e)=>{
+                            setHasDateErr(false)
+                            setStartDate(e.target.value)}} />
                     </div>
                 </div>
 
@@ -90,11 +120,18 @@ const EventForm = () => {
                     <div className={s.inputContainer}>
                         <input
                         type="datetime-local"
+                        className={hasDateErr ? s.eventInputErr : s.eventInput}
                         id="endDate"
                         value={endDate}
-                        onChange={(e)=>setEndDate(e.target.value)} />
+                        onChange={(e)=>{
+                            setHasDateErr(false)
+                            setEndDate(e.target.value)}} />
                     </div>
                 </div>
+                    {
+                        hasErr ? <p className={s.errorMessage}>Please fill in all the required fields</p> :
+                        hasDateErr && <p className={s.errorMessage}>Invalid or missing fields</p>
+                    }
                 <div className={s.inputFormBtn}>
                     <button type="submit">{onEdit ? "Update Event" : "Add event"}</button>
                     {onEdit && <button type="button" onClick={() => {

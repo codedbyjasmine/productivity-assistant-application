@@ -5,8 +5,14 @@ export const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
     const navigate = useNavigate()
-    const [users,setUsers] = useState([])
-    const [currentUser, setCurrentUser] = useState(null)
+    const [users,setUsers] = useState(()=>{
+        const stored = localStorage.getItem("users")
+        return stored ? JSON.parse(stored) : [];
+    })
+    const [currentUser, setCurrentUser] = useState(() => {
+        const stored = sessionStorage.getItem("currentUser")
+        return stored ? JSON.parse(stored) : null;
+    })
 
     const [usernameErr,setUsernameErr] = useState(false)
     const [passwordErr,setPasswordErr] = useState(false)
@@ -14,18 +20,15 @@ const AuthProvider = ({children}) => {
     const [userErr,setUserErr] = useState(false)
 
     // ========= Användare ========== //
-    
     useEffect(()=>{
-        //ladda registrerade användare
-        const storedUsers = JSON.parse(localStorage.getItem("users")) || []
-        setUsers(storedUsers)
-        
-        //ladda upp från session
-        const loggedInUser = JSON.parse(sessionStorage.getItem("currentUser"))
-        if(loggedInUser) {
-            setCurrentUser(loggedInUser)
-        }
-    },[])
+        console.log("Saving users:", users)
+        localStorage.setItem("users",JSON.stringify(users))
+    },[users])
+
+    useEffect(()=>{
+        console.log("saving currentuser:", currentUser)
+        sessionStorage.setItem("currentUser",JSON.stringify(currentUser))
+    },[currentUser])
     
     const handleLogin = (username,password) => {
         setUsernameErr(false)
@@ -47,7 +50,7 @@ const AuthProvider = ({children}) => {
         
         if(user){
             setCurrentUser(user)
-            sessionStorage.setItem("currentUser",JSON.stringify(user))
+            // sessionStorage.setItem("currentUser",JSON.stringify(user))
             navigate("/home")
         }
     }
@@ -97,8 +100,6 @@ const AuthProvider = ({children}) => {
         
         setUsers([...users,newUser])
         setCurrentUser(newUser)
-        localStorage.setItem("users", JSON.stringify([...users,newUser]))
-        sessionStorage.setItem("currentUser", JSON.stringify(newUser))
 
         navigate("/")
     }
@@ -111,7 +112,7 @@ const AuthProvider = ({children}) => {
 
     // ========= Event Planner ========= //
 
-    const [onEdit, setOnEdit] = useState(null)
+    // const [onEdit, setOnEdit] = useState(null)
 
     const addEvent = (newEvent) => {
         if(!currentUser) return
@@ -135,8 +136,6 @@ const AuthProvider = ({children}) => {
 
         setUsers(updatedUsers);
         setCurrentUser(updatedUser)
-        localStorage.setItem("users", JSON.stringify(updatedUsers))
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
     }
 
     const updateEvent = (updatedEvent) => {
@@ -159,8 +158,6 @@ const AuthProvider = ({children}) => {
         
         setUsers(updatedUsers)
         setCurrentUser(updatedUser)
-        localStorage.setItem("users", JSON.stringify(updatedUsers))
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
     }
 
     const deleteEvent = (eventId) => {
@@ -179,9 +176,7 @@ const AuthProvider = ({children}) => {
         
         setUsers(updatedUsers)
         setCurrentUser(updatedUser)
-        localStorage.setItem("users", JSON.stringify(updatedUsers))
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
-    }
+    }   
 
     // ========= Todos ========= // 
 
@@ -211,8 +206,6 @@ const AuthProvider = ({children}) => {
 
         setUsers(updatedUsers)
         setCurrentUser(updatedUser)
-        localStorage.setItem("users", JSON.stringify(updatedUsers))
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
     }
 
     const updateUserTodoStatus = (id) => {
@@ -233,8 +226,6 @@ const AuthProvider = ({children}) => {
 
         setUsers(updatedUsers);
         setCurrentUser(updatedUser);
-        localStorage.setItem("users", JSON.stringify(updatedUsers));
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
     };
 
     const removeUserTodo = (id) => {
@@ -253,8 +244,6 @@ const AuthProvider = ({children}) => {
 
         setUsers(updatedUsers);
         setCurrentUser(updatedUser);
-        localStorage.setItem("users", JSON.stringify(updatedUsers));
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
     };
 
     const updateUserTodo = (id, updatedTodo) => {
@@ -274,8 +263,6 @@ const AuthProvider = ({children}) => {
         );
         setUsers(updatedUsers);
         setCurrentUser(updatedUser);
-        localStorage.setItem("users", JSON.stringify(updatedUsers));
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
     }
 
         // ============ HABITS ============ //
@@ -303,8 +290,6 @@ const AuthProvider = ({children}) => {
 
         setUsers(updatedUsers)
         setCurrentUser(updatedUser)
-        localStorage.setItem("users", JSON.stringify(updatedUsers))
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
     }
 
     const removeHabit = (id) => {
@@ -323,8 +308,6 @@ const AuthProvider = ({children}) => {
 
         setUsers(updatedUsers);
         setCurrentUser(updatedUser);
-        localStorage.setItem("users", JSON.stringify(updatedUsers));
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
     };
 
     const increaseReps = (id) => {
@@ -347,8 +330,6 @@ const AuthProvider = ({children}) => {
 
         setUsers(updatedUsers);
         setCurrentUser(updatedUser);
-        localStorage.setItem("users", JSON.stringify(updatedUsers));
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser));
     };
 
     const decreaseReps = (id) => {
@@ -370,8 +351,6 @@ const AuthProvider = ({children}) => {
 
         setUsers(updatedUsers)
         setCurrentUser(updatedUser)
-        localStorage.setItem("users", JSON.stringify(updatedUsers))
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
     }
 
     const resetReps = (id) => {
@@ -394,8 +373,6 @@ const AuthProvider = ({children}) => {
 
         setUsers(updatedUsers)
         setCurrentUser(updatedUser)
-        localStorage.setItem("users", JSON.stringify(updatedUsers))
-        sessionStorage.setItem("currentUser", JSON.stringify(updatedUser))
     }
 
 
@@ -408,7 +385,6 @@ const AuthProvider = ({children}) => {
         confirmErr,setConfirmErr,
         handleLogin, handleRegister, handleLogout,
         addEvent, updateEvent, deleteEvent,
-        onEdit, setOnEdit,
         addUserTodo, updateUserTodoStatus, removeUserTodo,
         updateUserTodo, addHabit, removeHabit, increaseReps,
         decreaseReps, resetReps

@@ -1,0 +1,22 @@
+.ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}
+
+.ul li {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ul li h3 {
+  display: flex;
+  width: 50%;
+}
+
+.ul li div {
+  display: flex;
+  width: 75%;
+  justify-content: space-between;
+}

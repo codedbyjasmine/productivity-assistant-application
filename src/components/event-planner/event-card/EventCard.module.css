@@ -1,13 +1,22 @@
 .cardWrapper,
 .cardWrapperPast {
   display: flex;
-  width: 450px;
-  height: 120px;
-  background: linear-gradient(to right, #f8f9fa 0%, #ffffff 100%);
-  border: 1px solid #d8d8d8;
-  border-left: 4px solid #000000;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 340px;
+  height: 130px;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s;
+}
+
+.cardWrapper:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.cardWrapperPast {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
 }
 
 .cardInfoWrapper {
@@ -20,32 +29,38 @@
 .cardInfoDate,
 .cardInfoDatePast {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #4594e9 0%, #1d4ed8 100%);
-  border-radius: none;
+  background: #f5f5f5;
+  border-right: 1px solid #e5e5e5;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 0.75rem;
   width: 35%;
 }
 
 .cardInfoDatePast {
-  background: linear-gradient(135deg, #cecece 0%, #d6d6d6 100%);
+  background: #fafafa;
 }
+
 .cardInfoDate p {
-  color: white;
-  font-size: 14px;
+  color: #333;
+  font-size: 12px;
   font-weight: 600;
   text-align: center;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+  margin: 0;
 }
 
 .cardInfoDatePast p {
-  color: rgb(214, 87, 82);
-  font-size: 14px;
+  color: #999;
+  font-size: 12px;
   font-weight: 600;
   text-align: center;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+  margin: 0;
 }
 
 .cardInfo1,
@@ -70,26 +85,34 @@
 .cardInfo1 p,
 .cardInfo2 p {
   margin: 0;
-  color: rgb(188, 188, 188);
+  color: #888;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 .cardInfoPast1 p,
 .cardInfoPast2 p {
   margin: 0;
-  color: rgb(214, 87, 82);
+  color: #999;
+  font-size: 11px;
+  line-height: 1.4;
 }
 
 .cardContainer h3 {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-top: 5px;
+  color: #222;
+  font-size: 15px;
 }
 
 .cardContainerPast h3 {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-top: 5px;
-  color: rgb(214, 87, 82);
+  margin-bottom: 0;
+  color: #999;
+  font-size: 15px;
 }
 
 .cardContainer,
@@ -113,19 +136,21 @@
 
 .cardBtns button {
   padding: 6px 12px;
-  border: 1px solid #e0e0e0;
-  background: white;
-  border-radius: 3px;
-  font-size: 12px;
-  font-weight: 600;
+  border: 1px solid #e5e5e5;
+  background: #fafafa;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
-  letter-spacing: 0.5px;
-  color: rgb(188, 188, 188);
+  letter-spacing: 0.3px;
+  color: #666;
 }
 
 .cardBtns button:hover {
-  background: #f5f5f5;
-  border-color: #2563eb;
-  color: #2563eb;
+  background: white;
+  border-color: #333;
+  cursor: pointer;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

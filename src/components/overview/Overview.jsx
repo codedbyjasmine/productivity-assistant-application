@@ -1,14 +1,14 @@
 import { useContext } from "react"
 import { TodoContext } from "../../context/TodoContext"
-import { HabitContext } from "../../context/Habitcontext";
+import { HabitContext } from "../../context/HabitContext";
 import { AuthContext } from "../../context/Context";
+import { EventContext } from "../../context/EventContext";
+import s from './Overview.module.css'
 
 const Overview = () => {
     const { overviewTodos } = useContext(TodoContext);
     const { overviewHabits } = useContext(HabitContext);
-    const {currentUser} = useContext(AuthContext)
-
-    const overviewEvents = currentUser?.events.sort((a,b) =>new Date(a.startDate) - new Date (b.startDate));
+    const {overviewEvents,dayMonthYear,dayAndTime} = useContext(EventContext)
 
     return(
         <div>
@@ -39,12 +39,15 @@ const Overview = () => {
             </div>
             <div>
                 <h2>Upcoming events</h2>
-                <ul>
+                <ul className={s.ul}>
                     {
-                        overviewEvents?.map((e)=>
+                        overviewEvents().map((e)=>
                         <li key={e.id}>
                             <h3>{e.eventName}</h3>
-                            <p>{e.startDate}</p>
+                            <div>
+                                <p>{dayMonthYear(e.startDate)}</p>
+                                <p>{dayAndTime(e.startDate)}</p>
+                            </div>
                         </li>)
                     }
                 </ul>
