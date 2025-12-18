@@ -18,7 +18,6 @@ const Overview = () => {
                     <li key={todo.id}>
                         <h3>{todo.title}</h3>
                         <p>{todo.description}</p>
-                        <p>Status: {todo.status}</p>
                         <p>Estimated Time: {todo.estimatedTime}</p>
                         <p>Category: {todo.category}</p>
                         <p>Deadline: {todo.deadline}</p>
