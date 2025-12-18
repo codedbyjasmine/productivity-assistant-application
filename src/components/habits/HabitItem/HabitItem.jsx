@@ -1,6 +1,6 @@
 import { useContext } from "react"
-import { HabitContext } from "../../../context/Habitcontext";
 import { AuthContext } from "../../../context/Context";
+import { HabitContext } from "../../../context/HabitContext";
 
 const HabitItem = () => {
 
