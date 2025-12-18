@@ -9,7 +9,7 @@
   z-index: 999;
 }
 
-.addTodoContainer {
+.editTodoContainer {
   display: flex;
   flex-direction: column;
   padding: 2rem;

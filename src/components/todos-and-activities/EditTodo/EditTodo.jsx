@@ -1,8 +1,9 @@
 import { use, useContext, useState } from "react";
 import { AuthContext } from "../../../context/Context";
 import { TodoContext } from "../../../context/TodoContext";
+import styles from './EditTodo.module.css';
 
-const EditTodo = () => {
+const EditTodo = ({onClose}) => {
 
     
   const { editingTodoId, setEditingTodoId } = useContext(TodoContext);
@@ -32,7 +33,8 @@ const EditTodo = () => {
     }   
 
   return (
-    <div>
+    <div className={styles.backdrop} onClick={onClose}>
+    <div className={styles.editTodoContainer}>
       <h2>Edit Your Todo</h2>
       <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
       <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}/>
@@ -52,6 +54,7 @@ const EditTodo = () => {
       </select>
         <input type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
         <button onClick={() => {handleSave();}}>Save</button>
+    </div>
     </div>
   );
 }

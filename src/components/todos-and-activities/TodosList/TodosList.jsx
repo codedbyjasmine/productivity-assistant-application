@@ -32,7 +32,7 @@ const TodosList = () => {
                         </li>
                     ))}
                 </ul>
-                {Show && <EditTodo/>}
+                {Show && <EditTodo onClose={() => setShow(false)} />}
             </div>
         </>
     );

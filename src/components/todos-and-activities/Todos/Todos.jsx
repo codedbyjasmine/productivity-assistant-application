@@ -6,14 +6,13 @@ import styles from './Todos.module.css';
 
 const Todos = () => {
 
-    const [show, setShow] = useState(false);
-
+  const [show, setShow] = useState(false);
   const { todos } = useContext(TodoContext);
 
     return (
         <>
-        <button onClick={() => setShow(!show)} >Add New Todo</button>
-        {show && <AddTodo />}
+        <button onClick={() => setShow(!show)}>Add New Todo</button>
+        {show && <AddTodo onClose={() => setShow(false)} />}
         <TodosList todos={todos} />
         </>
     );

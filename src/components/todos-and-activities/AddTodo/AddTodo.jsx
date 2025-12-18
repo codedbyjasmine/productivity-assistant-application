@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/Context";
 import styles from './AddTodo.module.css';
 
-const AddTodo = () => {
+const AddTodo = ({ onClose }) => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -14,6 +14,7 @@ const AddTodo = () => {
   const { addUserTodo } = useContext(AuthContext);
 
   return (
+    <div className={styles.backdrop} onClick={onClose}>
     <div className={styles.addTodoContainer}>
       <h2>Add New Todo</h2>
       <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -40,6 +41,7 @@ const AddTodo = () => {
             setCategory("");
             setDeadline("");}}>
             Add Todo</button>
+    </div>
     </div>
   );
 }
