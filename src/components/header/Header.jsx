@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useContext } from "react"
 import EventPlanner from "../event-planner/EventPlanner"
 import Todos from "../todos-and-activities/Todos/Todos"
@@ -8,14 +8,28 @@ import Habits from "../habits/Habits/Habits"
 
 const Header = () => {
 
-    const[mode,setMode] = useState("overview");
+    const [mode, setMode] = useState("overview");
     const {currentUser} = useContext(AuthContext);
+    const [randomQuote, setRandomQuote] = useState("");
+
+    useEffect(() => {
+        const fetchRandomQuote = async () => {
+            try {
+                const response = await fetch("https://dummyjson.com/quotes/random");
+                const data = await response.json();
+                setRandomQuote(data);
+            } catch (error) {
+                console.error("Error fetching random quote:", error);
+            }
+        };
+        fetchRandomQuote();
+    }, []);
 
     return(
         <div>
             <div>
                 <h2>Hello {currentUser?.username}!</h2>
-                <h3>Random quote here</h3>
+                <p><i>"{randomQuote.quote}" - {randomQuote.author}</i></p>
             </div>
             <div>
                 <button onClick={()=>setMode("overview")}>Overview</button>
