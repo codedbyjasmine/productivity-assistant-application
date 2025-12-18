@@ -1,7 +1,5 @@
 import { useContext, useState } from "react"
-import { HabitContext } from "../../../context/Habitcontext";
-
-
+import { HabitContext } from "../../../context/HabitContext"
 
 const SortHabits = () => {
     
