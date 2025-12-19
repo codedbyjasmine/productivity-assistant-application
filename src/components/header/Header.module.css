@@ -1,0 +1,63 @@
+.introWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  padding: 1rem;
+}
+.navContainer {
+  display: flex;
+  padding: 0.4rem;
+  border-bottom: 2px solid rgb(233, 233, 233);
+}
+
+.bgColorCont {
+  background-color: white;
+}
+
+.welcomeContainer {
+  padding-top: 1rem;
+}
+
+.navContainer button {
+  border-radius: 0;
+  color: rgb(107, 112, 188);
+  background-color: transparent;
+  transition: all 0.3s ease;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+.navContainer button:hover {
+  border-radius: 0;
+  color: rgb(107, 112, 188);
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid rgb(107, 112, 188);
+  background: linear-gradient(
+    to bottom,
+    hsl(216, 100%, 99%),
+    hsl(216, 100%, 93%)
+  );
+}
+.navContainer button:active,
+.navContainer button:focus {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgb(107, 112, 188);
+  background: linear-gradient(
+    to bottom,
+    hsl(216, 100%, 99%),
+    hsl(216, 100%, 93%)
+  );
+}
+
+.introWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  padding: 1rem;
+}

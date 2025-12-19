@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react"
 import { useContext } from "react"
-import EventPlanner from "../event-planner/EventPlanner"
-import Todos from "../todos-and-activities/Todos/Todos"
-import Overview from "../overview/Overview"
 import { AuthContext } from "../../context/Context"
-import Habits from "../habits/Habits/Habits"
+import s from './Header.module.css'
 
 const Header = () => {
 
-    const [mode, setMode] = useState("overview");
-    const {currentUser} = useContext(AuthContext);
+    const  { setMode,currentUser} = useContext(AuthContext);
     const [randomQuote, setRandomQuote] = useState("");
 
     useEffect(() => {
@@ -26,21 +22,21 @@ const Header = () => {
     }, []);
 
     return(
-        <div>
-            <div>
+        <div className={s.bgColorCont}>
+            <div className={s.welcomeContainer}>
                 <h2>Hello {currentUser?.username}!</h2>
                 <p><i>"{randomQuote.quote}" - {randomQuote.author}</i></p>
             </div>
-            <div>
-                <button onClick={()=>setMode("overview")}>Overview</button>
-                <button onClick={()=>setMode("todos")}>Todos</button>
-                <button onClick={()=>setMode("habits")}>Habit</button>
-                <button onClick={()=>setMode("eventplanner")}>Event Planner</button>
+            <div className={s.introWrapper}>
+                    <h3>My tasks</h3>
+                    <p>Manage and track your tasks efficiently</p>
+                <div className={s.navContainer}>
+                    <button onClick={()=>setMode("overview")}>Overview</button>
+                    <button onClick={()=>setMode("todos")}>Todos</button>
+                    <button onClick={()=>setMode("habits")}>Habit</button>
+                    <button onClick={()=>setMode("eventplanner")}>Event Planner</button>
+                </div>
             </div>
-            {mode === "overview" && <Overview/> }
-            {mode === "todos" && <Todos/> }
-            {mode === "habits" && <Habits/> }
-            {mode === "eventplanner" && <EventPlanner/> }
         </div>
     )
 }
