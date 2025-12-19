@@ -5,6 +5,7 @@ export const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
     const navigate = useNavigate()
+    const[mode,setMode] = useState("overview");
     const [users,setUsers] = useState(()=>{
         const stored = localStorage.getItem("users")
         return stored ? JSON.parse(stored) : [];
@@ -61,28 +62,20 @@ const AuthProvider = ({children}) => {
         setConfirmErr(false)
         setUserErr(false)
 
-        if(!username && !password && !confirmP){
+        if(!username) {
             setUsernameErr(true)
-            setPasswordErr(true)
-            setConfirmErr(true)
-            return;
-        }
-        if(!username && password && confirmP) {
-            setUsernameErr(true); return}
-
-        if(username && !password && !confirmP) {
-            setPasswordErr(true); 
-            setConfirmErr(true);
+            if(!password) setPasswordErr(true)
+            if(!confirmP) setConfirmErr(true)
             return
         }
-
-        if(username && !password && confirmP) {
+        if(!password) {
             setPasswordErr(true)
+            if(!confirmP) setConfirmErr(true)
             return
         }
-        if(username && password && !confirmP){
+        if(!confirmP) {
             setConfirmErr(true)
-            return;
+            return
         }
         if(password !== confirmP) {setConfirmErr(true); return}
 
@@ -111,8 +104,6 @@ const AuthProvider = ({children}) => {
     }
 
     // ========= Event Planner ========= //
-
-    // const [onEdit, setOnEdit] = useState(null)
 
     const addEvent = (newEvent) => {
         if(!currentUser) return
@@ -383,6 +374,7 @@ const AuthProvider = ({children}) => {
         passwordErr, setPasswordErr,
         userErr, setUserErr,
         confirmErr,setConfirmErr,
+        mode,setMode,
         handleLogin, handleRegister, handleLogout,
         addEvent, updateEvent, deleteEvent,
         addUserTodo, updateUserTodoStatus, removeUserTodo,

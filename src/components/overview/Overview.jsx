@@ -11,15 +11,16 @@ const Overview = () => {
     const {overviewEvents,dayMonthYear,dayAndTime} = useContext(EventContext)
 
     return(
-        <div>
+        <div className={s.overviewContainer}>
             <div>
                 <h2>Your recent todos</h2>
                 <ul>{overviewTodos().map((todo)=>(
                     <li key={todo.id}>
                         <h3>{todo.title}</h3>
                         <p>{todo.description}</p>
+                        {/* <p>Status: {todo.status}</p>
                         <p>Estimated Time: {todo.estimatedTime}</p>
-                        <p>Category: {todo.category}</p>
+                        <p>Category: {todo.category}</p> */}
                         <p>Deadline: {todo.deadline}</p>
                     </li>
                 ))}</ul>
