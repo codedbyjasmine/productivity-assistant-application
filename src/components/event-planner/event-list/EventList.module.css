@@ -1,7 +1,9 @@
 .listContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   flex-wrap: wrap;
-  gap: 10px;
+  justify-content: center;
+  gap: 32px;
   padding: 1rem;
   border: 2px solid rgb(233, 233, 233);
   background-color: white;

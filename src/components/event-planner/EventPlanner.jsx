@@ -14,20 +14,14 @@ const EventPlanner = () => {
     return (
         <div>
             <EventForm />
-            <div>
-                <div>
-                    <h2 onClick={()=>setShowUpcomingEvents(!showUpcomingEvents)}>Kommande händelser</h2>
-                    {showUpcomingEvents &&
-                        <EventList events={upcomingEvents()} isPast={false}/>
-                    }
-                </div>
-                <div>
-                    <h2 onClick={()=>setShowPastEvents(!showPastEvents)}>Passerade händelser</h2>
-                    {showPastEvents &&
-                        <EventList events={pastEvents()} isPast={true} />
-                    }
-                </div>
-            </div>
+            <h2 onClick={()=>setShowUpcomingEvents(!showUpcomingEvents)}>Kommande händelser</h2>
+                {showUpcomingEvents &&
+                    <EventList events={upcomingEvents()} isPast={false}/>
+                }
+            <h2 onClick={()=>setShowPastEvents(!showPastEvents)}>Passerade händelser</h2>
+                {showPastEvents &&
+                    <EventList events={pastEvents()} isPast={true} />
+                }
         </div>
     )
 

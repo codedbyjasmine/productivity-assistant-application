@@ -15,7 +15,7 @@ const EventList = ({events,isPast}) => {
     const sortedEvents = [...events].sort((a,b)=> new Date(a.startDate) - new Date(b.startDate))
 
    return(
-    <div>
+    <div >
         <div className={s.listContainer}>
             {sortedEvents.map((event)=> 
                 <EventCard key={event.id} event={event} isPast={isPast}/>)
