@@ -12,18 +12,17 @@ const Overview = () => {
 
     return(
         <div className={s.overviewContainer}>
-            <div>
+            <div className={s.listWrapper}>
                 <h2>Your recent todos</h2>
                 <ul className={s.ul}>{overviewTodos().map((todo)=>(
                     <li key={todo.id}>
                         <h3>{todo.title}</h3>
                         <div>
-                        <p>{todo.description}</p>
                         <p>Deadline: {todo.deadline}</p></div>
                     </li>
                 ))}</ul>
             </div>
-            <div>
+            <div className={s.listWrapper}>
                 <h2>Your most repeated habits</h2>
                 <ul className={s.ul}>
                     {overviewHabits().map((habit) => (
@@ -35,7 +34,7 @@ const Overview = () => {
                 </ul>
 
             </div>
-            <div>
+            <div className={s.listWrapper}>
                 <h2>Upcoming events</h2>
                 <ul className={s.ul}>
                     {
@@ -43,8 +42,7 @@ const Overview = () => {
                         <li key={e.id}>
                             <h3>{e.eventName}</h3>
                             <div>
-                                <p>{dayMonthYear(e.startDate)}</p>
-                                <p>{dayAndTime(e.startDate)}</p>
+                                <p> {dayAndTime(e.startDate)}, {dayMonthYear(e.startDate)}</p>
                             </div>
                         </li>)
                     }
