@@ -19,7 +19,7 @@ const Overview = () => {
                     <li key={todo.id}>
                         <h3>{todo.title}</h3>
                         <div>
-                        <p>Deadline: {todo.deadline}</p></div>
+                        <p>Deadline: {dayMonthYear(todo.deadline)}</p></div>
                     </li>
                 ))}</ul>
             </div>
