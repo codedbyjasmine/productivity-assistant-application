@@ -9,10 +9,11 @@ const Overview = () => {
     const { overviewTodos } = useContext(TodoContext);
     const { overviewHabits } = useContext(HabitContext);
     const {overviewEvents,dayMonthYear,dayAndTime} = useContext(EventContext)
+    const { setMode } = useContext(AuthContext);
 
     return(
         <div className={s.overviewContainer}>
-            <div className={s.listWrapper}>
+            <div className={s.listWrapper} onClick={() => setMode("todos")}>
                 <h2>Your recent todos</h2>
                 <ul className={s.ul}>{overviewTodos().map((todo)=>(
                     <li key={todo.id}>
@@ -22,7 +23,7 @@ const Overview = () => {
                     </li>
                 ))}</ul>
             </div>
-            <div className={s.listWrapper}>
+            <div className={s.listWrapper} onClick={() => setMode("habits")}>
                 <h2>Your most repeated habits</h2>
                 <ul className={s.ul}>
                     {overviewHabits().map((habit) => (
@@ -34,7 +35,7 @@ const Overview = () => {
                 </ul>
 
             </div>
-            <div className={s.listWrapper}>
+            <div className={s.listWrapper} onClick={() => setMode("eventplanner")}>
                 <h2>Upcoming events</h2>
                 <ul className={s.ul}>
                     {
