@@ -9,7 +9,7 @@ const EditTodo = ({onClose}) => {
   const { editingTodoId, setEditingTodoId } = useContext(TodoContext);
   const { currentUser, updateUserTodo } = useContext(AuthContext);
 
-    const todo = currentUser.todos.find(todo => todo.id === editingTodoId);
+    const todo = currentUser?.todos?.find(todo => todo.id === editingTodoId);
 
     if (!todo) return null;
 
@@ -30,11 +30,12 @@ const EditTodo = ({onClose}) => {
             deadline
         });
         setEditingTodoId(null);
+        onClose();
     }   
 
   return (
     <div className={styles.backdrop} onClick={onClose}>
-    <div className={styles.editTodoContainer}>
+    <div className={styles.editTodoContainer} onClick={(e) => e.stopPropagation()}>
       <h2>Edit Your Todo</h2>
       <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
       <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}/>
