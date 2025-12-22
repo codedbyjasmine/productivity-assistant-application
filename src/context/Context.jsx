@@ -175,7 +175,7 @@ const AuthProvider = ({children}) => {
         if(!currentUser) return;
 
         const newTodo = {
-            id: crypto.randomUUID(),
+            id: Date.now(),
             title,
             description,
             status,

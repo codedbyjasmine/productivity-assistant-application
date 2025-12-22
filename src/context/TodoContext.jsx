@@ -51,7 +51,7 @@ const TodoProvider = ({ children }) => {
   }
 
   const overviewTodos = () => {  
-    return todos.filter(todo => todo.status === "Pending").slice(-3).reverse();
+    return todos.filter(todo => todo.status === "Pending").sort((a, b) => (b.id) - (a.id)).slice(-3).reverse();
   };
 
   return (
