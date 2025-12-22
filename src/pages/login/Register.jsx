@@ -53,7 +53,7 @@ const Register = () => {
                         <label htmlFor="password">Password</label>
                         <input
                         className={passwordErr ? s.inputError : s.input}
-                        type="text"
+                        type="password"
                         placeholder="Enter password"
                         value={password}
                         onChange={(e)=>{
@@ -69,7 +69,7 @@ const Register = () => {
                         <label htmlFor="password">Confirm password</label>
                         <input
                         className={confirmErr ? s.inputError : s.input}
-                        type="text"
+                        type="password"
                         placeholder="Enter password"
                         value={confirmP}
                         onChange={(e)=>{

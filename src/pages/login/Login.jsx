@@ -51,7 +51,7 @@ const Login = () => {
                         <label htmlFor="password">Password</label>
                         <input
                         className={passwordErr ? s.inputError : s.input}
-                        type="text"
+                        type="password"
                         id="passwordId"
                         placeholder="Enter password"
                         value={password}
