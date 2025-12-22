@@ -27,14 +27,16 @@ const EventProvider = ({children}) => {
             return `${day} ${time}`
         }
 
-    const today = new Date();
     const upcomingEvents = () => {
-        return currentUser?.events?.filter((e)=> new Date(e.endDate) >= today)}
+        const today = new Date();
+        return currentUser?.events?.filter((e)=> new Date(e.startDate) >= today)}
         
     const pastEvents = () => {
-        return currentUser?.events?.filter ((e)=> new Date(e.endDate) < today)}
+        const today = new Date();
+        return currentUser?.events?.filter ((e)=> new Date(e.startDate) < today)}
 
     const overviewEvents = () => {
+        const today = new Date();
         return currentUser?.events?.slice().filter((e)=> new Date(e.startDate) >= today)
         .sort((a,b) =>new Date(a.startDate) - new Date (b.startDate))
         .slice(0,3) || [];
