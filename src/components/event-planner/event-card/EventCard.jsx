@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { AuthContext } from "../../../context/Context"
+import { AuthContext } from "../../../context/AuthContext"
 import s from './EventCard.module.css'
 import { EventContext } from "../../../context/EventContext"
 

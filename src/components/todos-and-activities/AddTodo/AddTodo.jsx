@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../../../context/Context";
+import { AuthContext } from "../../../context/AuthContext";
 import styles from './AddTodo.module.css';
 
 const AddTodo = ({ onClose }) => {

@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { AuthContext } from "../../../context/Context";
+import { AuthContext } from "../../../context/AuthContext";
 import { HabitContext } from "../../../context/HabitContext";
 import styles from "./HabitItem.module.css";
 

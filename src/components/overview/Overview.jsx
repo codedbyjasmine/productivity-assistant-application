@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { TodoContext } from "../../context/TodoContext"
 import { HabitContext } from "../../context/HabitContext";
-import { AuthContext } from "../../context/Context";
+import { AuthContext } from "../../context/AuthContext";
 import { EventContext } from "../../context/EventContext";
 import s from './Overview.module.css'
 

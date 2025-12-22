@@ -1,7 +1,6 @@
 import {useState} from "react"
 import EventList from "./event-list/EventList"
 import EventForm from "./event-form/EventForm"
-import { AuthContext } from "../../context/Context"
 import { useContext } from "react"
 import s from './EventPlanner.module.css'
 import { EventContext } from "../../context/EventContext"

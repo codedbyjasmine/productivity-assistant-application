@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import Header from "../components/header/Header";
-import { AuthContext } from "../context/Context";
+import { AuthContext } from "../context/AuthContext";
 import s from './Homepage.module.css'
 import Overview from "../components/overview/Overview";
 import Todos from "../components/todos-and-activities/Todos/Todos";

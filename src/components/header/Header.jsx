@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useContext } from "react"
-import { AuthContext } from "../../context/Context"
+import { AuthContext } from "../../context/AuthContext"
 import s from './Header.module.css'
 
 const Header = () => {

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { AuthContext } from "./Context";
+import { AuthContext } from "./AuthContext";
 
 export const TodoContext = createContext();
 

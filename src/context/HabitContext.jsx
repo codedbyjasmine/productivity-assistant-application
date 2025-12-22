@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { AuthContext } from "./Context";
+import { AuthContext } from "./AuthContext";
 
 export const HabitContext = createContext();
 

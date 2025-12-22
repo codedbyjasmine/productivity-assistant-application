@@ -1,5 +1,5 @@
 import { use, useContext, useState } from "react";
-import { AuthContext } from "../../../context/Context";
+import { AuthContext } from "../../../context/AuthContext";
 import { TodoContext } from "../../../context/TodoContext";
 import styles from './EditTodo.module.css';
 

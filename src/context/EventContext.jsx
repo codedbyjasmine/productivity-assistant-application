@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { AuthContext } from "./Context";
+import { AuthContext } from "./AuthContext";
 import { useContext } from "react";
 
 export const EventContext = createContext ()
