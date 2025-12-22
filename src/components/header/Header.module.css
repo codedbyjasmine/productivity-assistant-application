@@ -13,10 +13,12 @@
 
 .bgColorCont {
   background-color: white;
+  margin-bottom: 10px;
 }
 
 .welcomeContainer {
   padding-top: 1rem;
+  border-bottom: 2px solid rgb(233, 233, 233);
 }
 
 .navContainer button {
