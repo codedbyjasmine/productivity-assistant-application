@@ -27,8 +27,8 @@ const TodosList = () => {
                         <p>Estimated Time: {todo.estimatedTime}</p>
                         <p>Category: {todo.category}</p>
                         <p>Deadline: {todo.deadline}</p>
-                        <button className={styles.EditBtn} onClick={() => {setShow(true); setEditingTodoId(todo.id)}}>&#xf044;</button>
-                        <button className={styles.RemoveBtn} onClick={() => {removeUserTodo(todo.id)}}>&#xf1f8;</button>
+                        <div><button className={styles.EditBtn} onClick={() => {setShow(true); setEditingTodoId(todo.id)}}>&#xf044;</button>
+                        <button className={styles.RemoveBtn} onClick={() => {removeUserTodo(todo.id)}}>&#xf1f8;</button></div>
                         </li>
                     ))}
                 </ul>
