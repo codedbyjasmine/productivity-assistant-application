@@ -7,6 +7,8 @@
     background-color: #ffffff;
     border-radius: 10px;
     color: black;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .completed {
@@ -18,7 +20,6 @@
 .todoItem, .completed {
     margin-bottom: 15px;
     padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     justify-content: space-between;
     width: 100%;
 }

@@ -10,11 +10,11 @@ const Todos = () => {
   const { todos } = useContext(TodoContext);
 
     return (
-        <>
-        <button onClick={() => setShow(!show)}>Add New Todo</button>
+        <div className={styles.todosContainer}>
+        <button className={styles.addTodoBtn} onClick={() => setShow(!show)}>Add New Todo</button>
         {show && <AddTodo onClose={() => setShow(false)} />}
         <TodosList todos={todos} />
-        </>
+        </div>
     );
 }
 export default Todos;

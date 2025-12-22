@@ -14,23 +14,21 @@ const Overview = () => {
         <div className={s.overviewContainer}>
             <div>
                 <h2>Your recent todos</h2>
-                <ul>{overviewTodos().map((todo)=>(
+                <ul className={s.ul}>{overviewTodos().map((todo)=>(
                     <li key={todo.id}>
                         <h3>{todo.title}</h3>
+                        <div>
                         <p>{todo.description}</p>
-                        {/* <p>Status: {todo.status}</p>
-                        <p>Estimated Time: {todo.estimatedTime}</p>
-                        <p>Category: {todo.category}</p> */}
-                        <p>Deadline: {todo.deadline}</p>
+                        <p>Deadline: {todo.deadline}</p></div>
                     </li>
                 ))}</ul>
             </div>
             <div>
                 <h2>Your most repeated habits</h2>
-                <ul>
+                <ul className={s.ul}>
                     {overviewHabits().map((habit) => (
                         <li key={habit.id}>
-                            <h3>Title: {habit.title}</h3>
+                            <h3>{habit.title}</h3>
                             <p>Repetitions: {habit.repetitions}</p>
                         </li>
                     ))}
