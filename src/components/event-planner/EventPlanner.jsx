@@ -12,13 +12,13 @@ const EventPlanner = () => {
     const [showPastEvents,setShowPastEvents] = useState(false)
 
     return (
-        <div>
+        <div className={s.eventBodyContainer}>
             <EventForm />
-            <h2 onClick={()=>setShowUpcomingEvents(!showUpcomingEvents)}>Upcoming events</h2>
+            <h2 className={`${s.eventsTitleList} ${showUpcomingEvents ? s.active : ''}`} onClick={()=>setShowUpcomingEvents(!showUpcomingEvents)}>Upcoming events</h2>
                 {showUpcomingEvents &&
                     <EventList events={upcomingEvents()} isPast={false}/>
                 }
-            <h2 onClick={()=>setShowPastEvents(!showPastEvents)}>Past events</h2>
+            <h2 className={`${s.eventsTitleList} ${showPastEvents ? s.active : ''}`} onClick={()=>setShowPastEvents(!showPastEvents)}>Past events</h2>
                 {showPastEvents &&
                     <EventList events={pastEvents()} isPast={true} />
                 }
