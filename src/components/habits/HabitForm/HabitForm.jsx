@@ -17,11 +17,14 @@ const { addHabit } = useContext(AuthContext);
                     <option value="Medium">🟡 Medium priority</option>
                     <option value="High">🔴 High priority</option>
                 </select>
-                <button onClick={() => addHabit(title, priority)}>Add Habit</button>
+                <button onClick={() => {addHabit(title, priority);
+                    setTitle(""); setPriority("Medium");
+                }}>Add Habit</button>
                 <hr className={styles.hr} />
             </div>
         </div>
     )
+
 }
 
 export default HabitForm
