@@ -15,7 +15,7 @@ const displayedHabits = currentUser?.habits ? getDisplayedHabits(currentUser.hab
                 <div key={habit.id} className={styles.habitCard}>
                     <div className={styles.habitHeader}>
                         <h3 className={styles.habitTitle}>{habit.title}</h3>
-                        <button className={styles.deleteBtn} onClick={() => removeHabit(habit.id)}>Delete</button>
+                        <button className={styles.deleteBtn} onClick={() => removeHabit(habit.id)}>&#xf1f8;</button>
                     </div>
                     <div className={styles.habitInfo}>
                         <p>Priority: {habit.priority}</p>
